@@ -1,16 +1,23 @@
 import { SearchButtonContainer, CountPublicationArea, SearchFormArea } from './styles';
+import {useContext } from 'react';
+import { PostsContext } from '../../../contexts/PostsContext';
 
 export function SearchButton() {
+
+    const {handleSubmit, handleSearchPosts, register, posts} = useContext(PostsContext)
+
+  
+
     return (
 
         <SearchButtonContainer>
             <CountPublicationArea>
                 <p>Publicações:</p>
-                <span>6 publicações</span>
+                <span>{posts.length} publicações</span>
             </CountPublicationArea>
 
-            <SearchFormArea>
-                <input type='text' placeholder='Busque uma postagem...' />
+            <SearchFormArea onChange={handleSubmit(handleSearchPosts)}>
+                <input type='text' placeholder='Busque uma postagem...' {...register('query')} />
             </SearchFormArea>
 
         </SearchButtonContainer>

@@ -1,14 +1,29 @@
-import { PostProfileArea } from './styles';
-import {PostProfileTitleArea} from './styles';
+import { PostProfileArea, PostProfileTitleArea, PostProfileContainer } from './styles';
+import {useContext } from 'react';
+
+import { PostsContext } from '../../../contexts/PostsContext';
 
 export function PostProfile() {
+
+   const {posts} = useContext(PostsContext)
+
     return (
-        <PostProfileArea>
-            <PostProfileTitleArea>
-                <h2>TITLE</h2>
-                <span>Data</span>
-            </PostProfileTitleArea>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took...</p>
-        </PostProfileArea>
+        <PostProfileContainer>
+
+            {posts.map(post => {
+                return (
+                    <div>
+                        <PostProfileArea>
+                            <PostProfileTitleArea>
+                                <h2>{post.title}</h2>
+                                <span>{post.updated_at}</span>
+                            </PostProfileTitleArea>
+                            <p>{post.body}</p>
+                        </PostProfileArea>
+                    </div>
+                )
+            })}
+
+        </PostProfileContainer>
     );
 }

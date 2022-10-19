@@ -9,13 +9,7 @@ export function PostsGrids() {
         <PostsGridContainer>
             <UserProfile />
             <SearchButton />
-
-            <PostsGridArea>
-                <PostProfile />
-                <PostProfile />
-                <PostProfile />
-                <PostProfile />
-            </PostsGridArea>
+            <PostProfile />
         </PostsGridContainer>
     )
 }

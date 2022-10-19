@@ -1,5 +1,6 @@
 import { TitlePostContainer, TitlePostArea, UserProfileIconsAreaSpace, UserProfileIconsArea, SetGithubArea } from './styles';
 import { GithubLogo, Users, ArrowLeft, ChatDots} from 'phosphor-react';
+import { NavLink } from 'react-router-dom';
 
 export function Post() {
 
@@ -8,7 +9,9 @@ export function Post() {
             <TitlePostArea>
                 <SetGithubArea>
                     <UserProfileIconsArea>
+                        <NavLink to='/' title='Menu'>
                         <ArrowLeft size={22} color="#3294F8" />
+                        </NavLink>
                         <span>Voltar</span>
                     </UserProfileIconsArea>
                     <UserProfileIconsArea>
