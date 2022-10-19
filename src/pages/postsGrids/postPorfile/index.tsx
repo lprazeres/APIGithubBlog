@@ -1,11 +1,15 @@
 import { PostProfileArea, PostProfileTitleArea, PostProfileContainer } from './styles';
-import {useContext } from 'react';
+import { useContext } from 'react';
 
 import { PostsContext } from '../../../contexts/PostsContext';
+import { NavLink } from 'react-router-dom';
+
+
 
 export function PostProfile() {
 
-   const {posts} = useContext(PostsContext)
+    const { posts } = useContext(PostsContext)
+
 
     return (
         <PostProfileContainer>
@@ -15,8 +19,10 @@ export function PostProfile() {
                     <div>
                         <PostProfileArea>
                             <PostProfileTitleArea>
-                                <h2>{post.title}</h2>
-                                <span>{post.updated_at}</span>
+                                <NavLink to={'/post/' + post.number} >
+                                    <h2>{post.title}</h2>
+                                </NavLink>
+                                <span>{post.newDate}</span>
                             </PostProfileTitleArea>
                             <p>{post.body}</p>
                         </PostProfileArea>

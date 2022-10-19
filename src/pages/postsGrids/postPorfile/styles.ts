@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const PostProfileArea = styled.div`
 width: 300px;
 max-width: 350px;
-height: 350px;
+height: 300px;
 display: flex;
 flex-direction: column;
 gap: 1.5rem;
@@ -15,6 +15,7 @@ background-color: ${props => props.theme['base-post']};
 
 h2{
 color: ${props => props.theme['base-title']};
+
 &:hover{
     color: ${props => props.theme['blue']};
 }
@@ -25,7 +26,7 @@ span{
 p {
    overflow: hidden;
    display: -webkit-box;
-  -webkit-line-clamp: 4;
+   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
 }
 `;

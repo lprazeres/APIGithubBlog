@@ -1,8 +1,27 @@
+import { useState, useEffect, useContext } from "react"
 import { TitlePostContainer, TitlePostArea, UserProfileIconsAreaSpace, UserProfileIconsArea, SetGithubArea } from './styles';
-import { GithubLogo, Users, ArrowLeft, ChatDots} from 'phosphor-react';
-import { NavLink } from 'react-router-dom';
+import { GithubLogo, Users, ArrowLeft, ChatDots } from 'phosphor-react';
+import { NavLink, useParams } from 'react-router-dom';
+import { PostsContext } from "../../contexts/PostsContext";
+
 
 export function Post() {
+
+
+    const { profiles } = useContext(PostsContext)
+
+    const { id } = useParams()
+    const [post, setPost] = useState([]);
+
+    useEffect(() => {
+        loadRoute();
+    }, []);
+
+    async function loadRoute() {
+        const response = await fetch(`https://api.github.com/repos/lprazeres/APIGithubBlog/issues/${id}`)
+        const data = await response.json()
+        setPost(data);
+    }
 
     return (
         <TitlePostContainer>
@@ -10,36 +29,35 @@ export function Post() {
                 <SetGithubArea>
                     <UserProfileIconsArea>
                         <NavLink to='/' title='Menu'>
-                        <ArrowLeft size={22} color="#3294F8" />
+                            <ArrowLeft size={22} color="#3294F8" />
                         </NavLink>
-                        <span>Voltar</span>
                     </UserProfileIconsArea>
-                    <UserProfileIconsArea>
-                        <span>Ver no GitHub</span>
-                    </UserProfileIconsArea>
+                    <a href='https://github.com/lprazeres'>
+                        <i><GithubLogo size={32} /></i>
+                    </a>
                 </SetGithubArea>
-                <h1>JavaScript data types and data structures</h1>
+                <h1>{post.title}</h1>
 
                 <UserProfileIconsAreaSpace>
                     <UserProfileIconsArea>
                         <i><GithubLogo size={32} /></i>
                         <span>-</span>
-                        <span>lprazeres</span>
+                        <span>{profiles.login}</span>
                     </UserProfileIconsArea >
                     <UserProfileIconsArea >
                         <i><Users size={32} /></i>
                         <span>-</span>
-                        <span>Seguidores</span>
+                        <span>{profiles.followers}</span>
                     </UserProfileIconsArea >
                     <UserProfileIconsArea >
                         <i><ChatDots size={32} /></i>
                         <span>-</span>
-                        <span>Seguidores</span>
+                        <span>Comentários</span>
                     </UserProfileIconsArea >
                 </UserProfileIconsAreaSpace>
             </TitlePostArea>
 
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+            <p>{post.body}</p>
 
 
         </TitlePostContainer>

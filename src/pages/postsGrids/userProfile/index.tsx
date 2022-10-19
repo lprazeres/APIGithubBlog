@@ -1,30 +1,12 @@
 import { UserProfileContainer, UserProfileArea, UserProfileTextArea, UserProfileTitleArea, UserProfileIconsAreaSpace, UserProfileIconsArea } from './styles';
 import { GithubLogo, Users, Smiley } from 'phosphor-react';
-import { useEffect, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import {useContext } from 'react';
+import { PostsContext } from '../../../contexts/PostsContext';
+
 
 export function UserProfile() {
 
-    interface profiles {
-        name: string,
-        bio: string,
-        login: string,
-        followers: number,
-    }
-
-    const [profiles, setProfile] = useState({} as profiles);
-
-    async function loadProfile() {
-        const response = await fetch('https://api.github.com/users/lprazeres')
-        const data = await response.json()
-
-        setProfile(data)
-
-    }
-
-    useEffect(() => {
-        loadProfile();
-    }, []);
+    const { profiles } = useContext(PostsContext)
 
     return (
         <UserProfileContainer>
